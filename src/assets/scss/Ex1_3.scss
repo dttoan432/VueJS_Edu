@@ -1,0 +1,56 @@
+.container {
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .calculator {
+        background-color: $blackColor;
+        border-radius: 10px;
+
+        .calculator_display {
+            padding: 20px 10px;
+            text-align: right;
+            color: white;
+        }
+
+        .calculator_button {
+            width: 240px;
+
+            .item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 58px;
+                height: 58px;
+                margin: 1px;
+                border-radius: 5px;
+                color: white;
+                float: left;
+                cursor: pointer;
+            }
+
+            .item:hover {
+                background-color: $whiteColor;
+                color: $blackColor;
+            }
+
+            .buttonFunction {
+                background-color: $darkGrayColor;
+            }
+
+            .buttonOperator {
+                background-color: $orangeColor;
+            }
+
+            .buttonNumber {
+                background-color: $grayColor;
+            }
+
+            .buttonMerge {
+                width: 118px;
+                margin: 1px;
+            }
+        }
+    }
+}
