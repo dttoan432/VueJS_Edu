@@ -1,0 +1,113 @@
+.container {
+    width: 90%;
+    display: flex;
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+
+        th {
+            padding: 20px;
+            background-color: #f2f6fe;
+        }
+        td {
+            border-bottom: none;
+            border-top: none;
+            padding: 5px 10px;
+
+            button{
+                background-color: #0080dd;
+                padding: 6px;
+                border-radius: 3px;
+                color: white;
+                border: none;
+            }
+            button:hover{
+                cursor: pointer;
+            }
+
+            div {
+                display: flex;
+                align-items: center;
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                    margin-right: 10px;
+                    float: left;
+                }
+            }
+            span {
+                font-size: 14px;
+            }
+
+            .greenColor {
+                color: limegreen;
+            }
+            .redColor {
+                color: red;
+            }
+        }
+    }
+
+    .wrap-cart {
+        border: 1px solid black;
+        width: 590px;
+        text-align: left;
+        margin-left: 20px;
+        padding: 0 20px;
+
+        h4 {
+            padding-left: 4px;
+            margin-left: 8px;
+        }
+
+        .cart-item {
+            height: 600px;
+
+            table {
+                padding-left: 5px;
+                width: 100%;
+                border: none;
+
+                tr {
+                    td {
+                        border: none;
+                        border-bottom: 1px dotted gray;
+                        padding: 10px 0px;
+
+                        p {
+                            margin: 0px;
+                        }
+
+                        img {
+                            width: 30px;
+                        }
+
+                        button {
+                            background-color: red;
+                            color: white;
+                            border: none;
+                            padding: 6px;
+                            border-radius: 3px;
+                        }
+
+                        button:hover {
+                            background-color: #b42e56;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+
+        .totalMoney {
+            text-align: right;
+            margin: 15px;
+
+            b {
+                color: red;
+            }
+        }
+    }
+}
