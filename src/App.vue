@@ -4,7 +4,8 @@
 <!--        <HelloWorld msg="Welcome to Your Vue.js App"/>-->
 <!--        <Ex1_1/>-->
 <!--        <Ex1_3/>-->
-        <Ex2_1/>
+<!--        <Ex2_1/>-->
+        <Todo/>
 <!--        <For_example/>-->
 <!--        <BT/>-->
 <!--        <Page1/>-->
@@ -16,7 +17,8 @@
 // import HelloWorld from './components/Learn/Lessons 1/HelloWorld.vue'
 // import Ex1_1 from './components/Exercise/Lessons 1/Ex1_1'
 // import Ex1_3 from './components/Exercise/Lessons 1/Ex1_3'
-import Ex2_1 from './components/Exercise/Lessons 2/Ex2_1'
+// import Ex2_1 from './components/Exercise/Lessons 2/Ex2_1'
+import Todo from "./components/Exercise/Lessons 3/Todo";
 // import For_example from './components/Learn/Lessons 2/For_example.vue'
 // import For_example from './components/Learn/Lessons 3/For_example.vue'
 // import For_example from './components/Learn/Lessons 4/For_example.vue'
@@ -30,7 +32,8 @@ export default {
         // HelloWorld,
         // Ex1_1,
         // Ex1_3,
-        Ex2_1,
+        // Ex2_1,
+        Todo,
         // For_example,
         // BT,
       // Page1,
@@ -46,6 +49,6 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    /*margin-top: 60px;*/
 }
 </style>
