@@ -8,7 +8,7 @@
 <!--        <Ex2_2/>-->
 <!--        <Todo/>-->
 <!--        <BaseLayout_4_1/>-->
-<!--        <BaseLayout_4_2/>-->
+        <NewsDetailPage/>
 <!--        <For_example/>-->
 <!--        <BT/>-->
 <!--        <Page1/>-->
@@ -24,7 +24,7 @@
 // import Ex2_2 from './components/Exercise/Lessons 2/Ex2_2'
 // import Todo from './components/Exercise/Lessons 3/Todo';
 // import BaseLayout_4_1 from "./components/Exercise/Lessons 4/BaseLayout_4_1";
-// import BaseLayout_4_2 from "./components/Exercise/Lessons 4/BaseLayout_4_2";
+import NewsDetailPage from "./components/Exercise/Lessons 4/NewsDetailPage";
 // import For_example from './components/Learn/Lessons 2/For_example.vue'
 // import For_example from './components/Learn/Lessons 3/For_example.vue'
 // import For_example from './components/Learn/Lessons 4/For_example.vue'
@@ -42,7 +42,7 @@ export default {
         // Ex2_2,
         // Todo,
         // BaseLayout_4_1,
-        // BaseLayout_4_2,
+        NewsDetailPage,
         // For_example,gi
         // BT,
       // Page1,
