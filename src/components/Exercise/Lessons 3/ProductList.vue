@@ -9,7 +9,7 @@
                 <th class="title-code">Trạng thái</th>
                 <th class="title-code">Hoạt động</th>
             </tr>
-            <tr v-for="(product, index) in products" :key="index">
+            <tr v-for="(product, index) in drag" :key="index">
                 <td class="product-text-left">{{ product.code }}</td>
                 <td class="product-text-left">{{ product.name }}</td>
                 <td class="product-text-left">
@@ -50,6 +50,7 @@ export default {
     props: ['item'],
     data() {
         return {
+            drag: [],
             products: [],
             start: 0,
             end: 0,
@@ -63,11 +64,17 @@ export default {
         updateItem(value) {
             this.$emit('productItemUpdate', this.products[value])
         },
-        prev() {
-
+        next(){
+            this.start += 5;
+            (this.end + 5 > this.products.length) ? this.end += this.products.length - this.end : this.end+=5
+            this.presentPage+=1;
+            this.drag = this.products.slice(this.start - 1, this.end)
         },
-        next() {
-
+        prev(){
+            this.start -= 5;
+            (this.end === this.products.length) ? this.end -= this.end % 5 : this.end -= 5
+            this.presentPage -= 1;
+            this.drag = this.products.slice(this.start - 1, this.end)
         }
     },
     watch: {
@@ -85,7 +92,13 @@ export default {
             if (flag) {
                 this.products.push(value)
             }
-        }
+
+            if (this.products.length > 0 && this.products.length < 6){
+                this.start = 1;
+                this.end = this.products.length;
+                this.drag = this.products.slice(this.start - 1, this.end)
+            }
+        },
     }
 }
 </script>
