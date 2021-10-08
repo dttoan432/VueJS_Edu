@@ -37,7 +37,7 @@
         </table>
         <div class="pagination-wrap">
             <span>Hiển thị {{ start }} - {{ end }} trên tổng {{ products.length }} ({{ presentPage }} trang)</span>
-                <el-pagination background layout="prev, pager, next" :total="products.length" :page-size="5"></el-pagination>
+                <el-pagination background layout="prev, next" :total="products.length" :page-size="5"></el-pagination>
         </div>
     </div>
 </template>
