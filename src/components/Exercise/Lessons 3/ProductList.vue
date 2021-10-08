@@ -37,7 +37,9 @@
         </table>
         <div class="pagination-wrap">
             <span>Hiển thị {{ start }} - {{ end }} trên tổng {{ products.length }} ({{ presentPage }} trang)</span>
-                <el-pagination background layout="prev, next" :total="products.length" :page-size="5"></el-pagination>
+            <el-pagination background layout="prev, next" :total="products.length"
+                           :page-size="5" @prev-click="prev()" @next-click="next()">
+            </el-pagination>
         </div>
     </div>
 </template>
@@ -48,14 +50,9 @@ export default {
     props: ['item'],
     data() {
         return {
-            products: [{
-                code: 'SP' + new Date().getTime(),
-                name: 'Bột giặt',
-                price: 100000,
-                quantity: 10,
-            }],
-            start: 1,
-            end: 1,
+            products: [],
+            start: 0,
+            end: 0,
             presentPage: 1,
         }
     },
@@ -65,6 +62,12 @@ export default {
         },
         updateItem(value) {
             this.$emit('productItemUpdate', this.products[value])
+        },
+        prev() {
+
+        },
+        next() {
+
         }
     },
     watch: {
@@ -88,49 +91,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container-list {
-    table, th, td {
-        border: 1px solid #DCDFE6;
-        border-collapse: collapse;
-    }
-
-    table {
-        width: 100%;
-
-        tr {
-            th {
-                padding: 15px;
-                background-color: #f2f6fe;
-            }
-            td {
-                padding: 10px 15px;
-                border-top: none;
-                border-bottom: none;
-                font-size: 14px;
-            }
-            .title-code {
-                width: 150px;
-            }
-            .title-name {
-                width: 200px;
-            }
-            .product-text-left {
-                text-align: left;
-            }
-        }
-    }
-
-    .pagination-wrap {
-        text-align: left;
-        margin-top: 20px;
-
-        span {
-            float: left;
-        }
-        .el-pagination {
-            float: right;
-            padding: 0;
-        }
-    }
-}
+@import "src/assets/scss/ProductList";
 </style>
