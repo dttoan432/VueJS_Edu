@@ -66,8 +66,8 @@ export default {
         },
         next(){
             this.start += 5;
-            (this.end + 5 > this.products.length) ? this.end += this.products.length - this.end : this.end+=5
-            this.presentPage+=1;
+            (this.end + 5 > this.products.length) ? this.end += this.products.length - this.end : this.end += 5
+            this.presentPage += 1;
             this.drag = this.products.slice(this.start - 1, this.end)
         },
         prev(){
