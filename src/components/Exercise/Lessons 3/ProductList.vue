@@ -60,6 +60,17 @@ export default {
     methods: {
         destroyItem(value) {
             this.products.splice(value, 1)
+
+            if (this.products.length > 0){
+                if (this.products.length < 6) {
+                    this.start = 1;
+                    this.end = this.products.length;
+                    this.drag = this.products.slice(this.start - 1, this.end)
+                }
+            } else {
+                this.start = this.end = 0
+                this.drag = []
+            }
         },
         updateItem(value) {
             this.$emit('productItemUpdate', this.products[value])
