@@ -66,6 +66,15 @@ export default {
                     this.start = 1;
                     this.end = this.products.length;
                     this.drag = this.products.slice(this.start - 1, this.end)
+                } else {
+                    if (this.end > this.products.length) {
+                        this.end = this.products.length
+                        if (this.start > this.end) {
+                            this.start -= 5
+                            alert(this.start)
+                        }
+                        this.drag = this.products.slice(this.start - 1, this.end)
+                    }
                 }
             } else {
                 this.start = this.end = 0
