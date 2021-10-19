@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 // import Profile from "../views/Profile";
 import Post from "../views/Post";
 // import Ex5_1 from "../components/Exercise/Lessons 5/Ex5_1";
+import BaseLessons5 from "../components/Learn/Lessons 5/Baselayout";
 
 Vue.use(VueRouter)
 
@@ -11,7 +12,7 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home,
+        component: BaseLessons5,
     },
     {
         path: '/login',
@@ -63,12 +64,6 @@ const routes = [
         name: 'BranchInventory',
         component: () => import('../components/Exercise/Lessons 5/BranchInventory'),
     },
-
-
-
-
-
-
     {
         path: '/system',
         name: 'System',
