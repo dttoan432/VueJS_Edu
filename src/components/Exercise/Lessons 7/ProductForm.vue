@@ -36,7 +36,6 @@ import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: "ProductForm",
-  // props: ['product'],
   computed: {
     ...mapState([
       'name',
@@ -52,7 +51,9 @@ export default {
     ]),
   },
   data() {
-    return {}
+    return {
+
+    }
   },
   methods: {
     ...mapMutations([
@@ -103,9 +104,9 @@ export default {
           this.updateProducts(data)
         }
 
-        // this.updateName('')
-        // this.updatePrice('')
-        // this.updateQuantity('')
+        this.updateName('')
+        this.updatePrice('')
+        this.updateQuantity('')
         this.updateButtonName('Tạo mới')
       }
     },
@@ -127,12 +128,6 @@ export default {
     quantity(value) {
       (value !== '') ? this.updateErrorQuantity(false) : ''
     },
-    product(value) {
-      this.name = value.name
-      this.price = value.price
-      this.quantity = value.quantity
-      this.buttonName = 'Cập nhật'
-    }
   },
 }
 </script>

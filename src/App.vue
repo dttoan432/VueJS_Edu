@@ -7,24 +7,33 @@
     <!--        <button @click="pushT()">Push to profile</button>-->
     <!--        <button @click="pushT()">Push to post</button>-->
     <!--    </div>-->
-    <!--    <router-view/>-->
+<!--        <router-view/>-->
+<!--        <Baselayout/>-->
     <!--    <Lessons_7/>-->
 <!--    <Todo/>-->
-    <Exercise/>
+<!--    <Exercise/>-->
+    <Ex7_1/>
+<!--    <BT/>-->
   </div>
 </template>
 
 <script>
+// import Baselayout from './components/Learn/Lessons 5/Baselayout'
 // import Lessons_7 from './components/Learn/Lessons 7/For_example.vue'
+// import BT from './components/Learn/Lessons 7/BT'
 // import Todo from './components/Learn/Lessons 7/Todo'
-import Exercise from './components/Exercise/Lessons 7/Exercise'
+// import Exercise from './components/Exercise/Lessons 7/Exercise'
+import Ex7_1 from './components/Exercise/Lessons 7/Ex7_1'
 
 export default {
   name: 'App',
   components: {
+    // Baselayout
     // Lessons_7,
     //   Todo,
-    Exercise
+    // Exercise,
+    Ex7_1,
+    // BT
   },
   methods: {
     // pushT() {

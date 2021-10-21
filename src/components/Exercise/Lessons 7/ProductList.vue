@@ -57,15 +57,13 @@ export default {
       'drag',
       'products',
       'codeProduct',
-        'start',
-        'end',
-        'presentPage'
+      'start',
+      'end',
+      'presentPage'
     ]),
   },
   data() {
-    return {
-
-    }
+    return {}
   },
   methods: {
     ...mapMutations([
@@ -125,7 +123,7 @@ export default {
     },
     next() {
       this.updateStart(this.start + 5)
-      if (this.end + 5 > this.products.length){
+      if (this.end + 5 > this.products.length) {
         this.updateEnd(this.end + (this.products.length - this.end))
       } else {
         this.updateEnd(this.end + 5)

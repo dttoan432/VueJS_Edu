@@ -18,21 +18,6 @@ export default {
     components: {
         ProductList,
         ProductForm
-    },
-    data() {
-        return {
-            item: '',
-            product: ''
-        }
-    },
-    methods: {
-        handleAddProduct(value) {
-            this.item = value
-            this.product = ''
-        },
-        handleFillProduct(value) {
-            this.product = value
-        }
     }
 }
 </script>

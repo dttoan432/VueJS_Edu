@@ -88,7 +88,12 @@ const routes = [
                 component: Post
             }
         ]
-    }
+    },
+    {
+        path: '/product-detail',
+        name: 'Product detail',
+        component: () => import('../components/Learn/Lessons 5/ProductDetail')
+    },
 ]
 
 const router = new VueRouter({
