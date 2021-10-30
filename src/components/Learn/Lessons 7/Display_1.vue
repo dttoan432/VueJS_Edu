@@ -27,7 +27,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations([
+        ...mapMutations('home',[
             'updateUserName'
         ]),
         handleUserName () {

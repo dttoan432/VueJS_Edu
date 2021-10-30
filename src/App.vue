@@ -9,10 +9,12 @@
     <!--    </div>-->
 <!--        <router-view/>-->
 <!--        <Baselayout/>-->
-    <!--    <Lessons_7/>-->
+<!--        <Lessons_7/>-->
 <!--    <Todo/>-->
 <!--    <Exercise/>-->
-    <Ex7_1/>
+<!--    <Ex7_1/>-->
+<!--    <Ex5_1/>-->
+    <Ex9_1/>
 <!--    <BT/>-->
   </div>
 </template>
@@ -21,9 +23,11 @@
 // import Baselayout from './components/Learn/Lessons 5/Baselayout'
 // import Lessons_7 from './components/Learn/Lessons 7/For_example.vue'
 // import BT from './components/Learn/Lessons 7/BT'
+// import Ex5_1 from './components/Exercise/Lessons 5/Ex5_1'
 // import Todo from './components/Learn/Lessons 7/Todo'
 // import Exercise from './components/Exercise/Lessons 7/Exercise'
-import Ex7_1 from './components/Exercise/Lessons 7/Ex7_1'
+// import Ex7_1 from './components/Exercise/Lessons 7/Ex7_1'
+import Ex9_1 from './components/Exercise/Lessons 9/Ex9_1'
 
 export default {
   name: 'App',
@@ -32,8 +36,10 @@ export default {
     // Lessons_7,
     //   Todo,
     // Exercise,
-    Ex7_1,
-    // BT
+    // Ex7_1,
+    // BT,
+    // Ex5_1
+     Ex9_1
   },
   methods: {
     // pushT() {

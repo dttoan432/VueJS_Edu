@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
 // import Profile from "../views/Profile";
 import Post from "../views/Post";
-// import Ex5_1 from "../components/Exercise/Lessons 5/Ex5_1";
-import BaseLessons5 from "../components/Learn/Lessons 5/Baselayout";
+import Ex5_1 from "../components/Exercise/Lessons 5/Ex5_1";
+// import BaseLessons5 from "../components/Learn/Lessons 5/Baselayout";
 
 Vue.use(VueRouter)
 
@@ -12,7 +12,7 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: BaseLessons5,
+        component: Ex5_1,
     },
     {
         path: '/login',

@@ -2,10 +2,12 @@
     <div class="todo-container">
         <div class="todo-item" v-for="(value, index) in listWork" :key="index">
             <div class="todo-info">
-                <input type="checkbox" @click="handleTick(index, $event)" :checked="value.isActive">
-                <span :class="{ del: value.isActive }">{{ value.work }}</span>
+                <div>
+                   <input type="checkbox" @click="handleTick(index, $event, value.id)" :checked="value.is_complete">
+                   <span :class="{ del: value.is_complete }">{{ value.title }}</span>
+                </div>
             </div>
-            <button @click="handleDeleteItem(index)" v-if="value.isActive">Xóa</button>
+            <button @click="handleDeleteItem(value.id)" v-if="value.is_complete === 1">Xóa</button>
         </div>
         <div class="todo-null" v-if="listWork.length === 0">
             Chưa có task nào được thêm
@@ -14,42 +16,115 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+// import { mapState, mapMutations } from 'vuex'
+import axios from 'axios'
 
 export default {
     name: "TodoItem",
+   props: ['todoItem'],
     data() {
         return {
-
+            listWork: []
         }
     },
     methods: {
         handleDeleteItem(index) {
-            this.deleteWork(index)
+           axios({
+              method: 'delete',
+              url: `http://vuecourse.zent.edu.vn/api/todos/${index}`,
+           }).then(() => {
+              this.getTodoList()
+           }).catch((error) => {
+              // handle error
+              console.log(error);
+           });
         },
-        handleTick(index, event){
-            let obj = {
-                index: index,
-                event: 0
-            }
-            if (event.target.checked) {
-                obj.event = 1
-                this.tick(obj)
-            } else {
-                obj.event = 0
-                this.tick(obj)
-            }
+        handleTick(index, event, id){
+           let done = ''
+           if (event.target.checked) {
+              this.listWork[index].isActive = 1
+              done = 1
+              this.listWork.push([])
+              this.listWork.pop()
+           } else {
+              this.listWork[index].isActive = 0
+              this.listWork.push([])
+              this.listWork.pop()
+              done = 0
+           }
+           axios({
+              method: 'put',
+              url:  `http://vuecourse.zent.edu.vn/api/todos/${id}`,
+              data: {
+                 is_complete: done,
+              }
+           }).then(() => {
+              this.getTodoList()
+              // alert('ok')
+           }).catch(() => {
+              //
+           });
         },
-        ...mapMutations([
-            'deleteWork',
-            'tick'
-        ]),
+        // ...mapMutations([
+        //     'deleteWork',
+        //     'tick'
+        // ]),
+       getTodoList() {
+          axios({
+             method: 'get',
+             url: 'http://vuecourse.zent.edu.vn/api/todos',
+          }).then((response) => {
+             this.listWork = response.data.data.data
+             this.listWork.forEach((data) => {
+                data.isActive = 0
+             })
+          }).catch((error) => {
+             // handle error
+             console.log(error);
+          });
+       },
+       addWork() {
+          axios({
+             method: 'post',
+             url: 'http://vuecourse.zent.edu.vn/api/todos',
+             data: {
+                title: this.todoItem,
+             }
+          }).then(() => {
+             this.getTodoList()
+            // alert('ok')
+          }).catch(() => {
+             //
+          });
+       },
+       handleDone(id) {
+          axios({
+             method: 'put',
+             url:  `http://vuecourse.zent.edu.vn/api/todos/${id}`,
+             data: {
+                is_complete: 1,
+             }
+          }).then(() => {
+             this.getTodoList()
+             // alert('ok')
+          }).catch(() => {
+             //
+          });
+       }
     },
-    computed: {
-        ...mapState([
-            'listWork'
-        ]),
-    }
+   mounted() {
+       this.getTodoList()
+   },
+   watch: {
+       todoItem() {
+          this.addWork()
+       }
+   }
+   // computed: {
+    //     ...mapState([
+    //         'listWork'
+    //     ]),
+    // }
 }
 </script>
 
