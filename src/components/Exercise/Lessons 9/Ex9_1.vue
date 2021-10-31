@@ -2,10 +2,10 @@
    <div class="container">
       <div class="box">
          <div>
-            <el-input placeholder="Nhập tên sản phẩm" v-model="search"></el-input>
+            <el-input placeholder="Nhập tên sản phẩm" v-model="search" clearable></el-input>
             <el-button type="primary" plain @click="getListProduct()">Tìm kiếm</el-button>
          </div>
-         <el-button type="primary" plain @click="dialogVisible = true">Thêm sản phẩm</el-button>
+         <el-button type="primary" plain @click="resetData(true)">Thêm sản phẩm</el-button>
       </div>
       <template>
          <el-table :data="listProduct.data" style="width: 100%">
@@ -21,14 +21,14 @@
             <el-table-column prop="price" label="Đơn giá" width="180"></el-table-column>
             <el-table-column label="Hành động">
                <template slot-scope="scope">
-                  <el-button type="text" size="small">Sửa</el-button>
+                  <el-button type="text" size="small" @click="getData(scope.row)">Sửa</el-button>
                   <el-button type="text" size="small" @click="deleteProduct(scope.row.id)">Xóa</el-button>
                </template>
             </el-table-column>
          </el-table>
       </template>
 
-      <el-dialog title="Thêm sản phẩm" :visible.sync="dialogVisible" width="40%" :before-close="handleClose">
+      <el-dialog title="Thêm sản phẩm" :visible.sync="dialogVisible" width="40%">
          <el-form label-position="left" label-width="150px" :model="formLabelAlign">
             <el-form-item label="Tên sản phẩm">
                <el-input v-model="formLabelAlign.name"></el-input>
@@ -42,7 +42,8 @@
          </el-form>
          <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">Đóng</el-button>
-            <el-button type="primary" @click="addProduct()">Tạo mới</el-button>
+            <el-button type="primary" v-if="!check" @click="updateProduct()">Thay đổi</el-button>
+            <el-button type="primary" v-else @click="addProduct()">Tạo mới</el-button>
          </span>
       </el-dialog>
 
@@ -89,16 +90,35 @@ export default {
             from: 0,
             to: 0
          },
+         id: '',
+         check: false,
       }
    },
    methods: {
-      getListProduct() {
+      resetData(value) {
+         this.formLabelAlign.name = ''
+         this.formLabelAlign.description = ''
+         this.formLabelAlign.price = ''
+         this.formLabelAlign.image = ''
+         this.id = ''
+         if(value){
+            this.check = true;
+            this.dialogVisible = true
+         } else {
+            this.check = false;
+         }
+      },
+      getListProduct(page = 1) {
          let data = '';
+         let paramPage = {
+            page: page
+         };
          (this.search === '') ? data = '/products' : data = `/products?q=${this.search}`
          axios({
-            methods: 'get',
+            method: 'get',
             baseURL: 'http://vuecourse.zent.edu.vn/api',
-            url: data
+            url: data,
+            params: paramPage
          }).then((res) => {
             this.listProduct = res.data.data
             this.page.currentPage = res.data.data.current_page
@@ -112,43 +132,82 @@ export default {
       },
       addProduct() {
          this.dialogVisible = false
-         this.search = ''
          axios({
-            methods: 'post',
-            baseURL: 'http://vuecourse.zent.edu.vn/api',
-            url: '/products',
+            method: 'post',
+            url: 'http://vuecourse.zent.edu.vn/api/products',
             data: {
                name: this.formLabelAlign.name,
                description: this.formLabelAlign.description,
                price: this.formLabelAlign.price,
-               image: this.formLabelAlign.image
             }
          }).then(() => {
-            // this.formLabelAlign.name = ''
-            // this.formLabelAlign.description = ''
-            // this.formLabelAlign.price = ''
-            // this.formLabelAlign.image = ''
+            this.resetData(false)
             this.getListProduct()
-            alert('ok')
+            this.search = ''
+            this.$message({
+               message: 'Tạo sản phẩm thành công.',
+               type: 'success'
+            });
+         }).catch(() => {
+            this.$message.error({
+               message: 'Tạo sản phẩm thất bại.',
+            });
+         })
+      },
+      getData(value) {
+         this.id = value.id
+         this.check = false
+         this.formLabelAlign.name = value.name
+         this.formLabelAlign.description = value.description
+         this.formLabelAlign.price = value.price
+         this.formLabelAlign.image = value.image
+         this.dialogVisible = true
+      },
+      updateProduct() {
+         this.dialogVisible = false
+         axios({
+            method: 'post',
+            url: `http://vuecourse.zent.edu.vn/api/products/${this.id}`,
+            data: {
+               name: this.formLabelAlign.name,
+               description: this.formLabelAlign.description,
+               price: this.formLabelAlign.price,
+            }
+         }).then(() => {
+            this.resetData(false)
+            this.getListProduct()
+            this.search = ''
+            this.$message({
+               message: 'Sửa sản phẩm thành công.',
+               type: 'success'
+            });
+         }).catch(() => {
+            this.$message.error({
+               message: 'Sửa sản phẩm thất bại.',
+            });
          })
       },
       deleteProduct(id) {
          this.$confirm('Bạn có chắc chắn muốn xóa sản phẩm này không')
              .then(() => {
                 axios({
-                   methods: 'delete',
-                   baseURL: 'http://vuecourse.zent.edu.vn/api',
-                   url: `/products/${id}`,
+                   method: 'delete',
+                   url: `http://vuecourse.zent.edu.vn/api/products/${id}`,
                 }).then(() => {
                    this.getListProduct()
-                   alert('ok delete')
+                   this.$message({
+                      message: 'Xóa sản phẩm thành công.',
+                      type: 'success'
+                   });
                 }).catch(() => {
-                   alert('fail')
+                   this.$message.error({
+                      message: 'Xóa sản phẩm thất bại.',
+                   });
                 })
              })
       },
-      handleCurrentChange() {
-         this.getListProduct()
+      handleCurrentChange(value) {
+         this.getListProduct(value)
       }
    },
    watch: {
