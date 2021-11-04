@@ -14,7 +14,9 @@
 <!--    <Exercise/>-->
 <!--    <Ex7_1/>-->
 <!--    <Ex5_1/>-->
-    <Ex9_1/>
+<!--    <Ex9_1/>-->
+<!--    <Ex10_1/>-->
+    <Ex10_2/>
 <!--    <BT/>-->
   </div>
 </template>
@@ -27,7 +29,9 @@
 // import Todo from './components/Learn/Lessons 7/Todo'
 // import Exercise from './components/Exercise/Lessons 7/Exercise'
 // import Ex7_1 from './components/Exercise/Lessons 7/Ex7_1'
-import Ex9_1 from './components/Exercise/Lessons 9/Ex9_1'
+// import Ex9_1 from './components/Exercise/Lessons 9/Ex9_1'
+// import Ex10_1 from './components/Exercise/Lessons 10/Ex10_1'
+import Ex10_2 from './components/Exercise/Lessons 10/Ex10_2'
 
 export default {
   name: 'App',
@@ -39,7 +43,9 @@ export default {
     // Ex7_1,
     // BT,
     // Ex5_1
-     Ex9_1
+    //  Ex9_1
+    //  Ex10_1
+     Ex10_2
   },
   methods: {
     // pushT() {

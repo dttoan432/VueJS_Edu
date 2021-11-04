@@ -33,38 +33,25 @@
          </el-table>
       </template>
 
-      <el-dialog title="Thêm sản phẩm" :visible.sync="dialogVisible" width="40%">
-         <el-form label-position="left" label-width="150px" :model="formLabelAlign">
-            <el-form-item label="Tên sản phẩm">
-               <el-input v-model="formLabelAlign.name"></el-input>
-            </el-form-item>
-            <el-form-item label="Mô tả">
-               <el-input v-model="formLabelAlign.description"></el-input>
-            </el-form-item>
-            <el-form-item label="Đơn giá">
-               <el-input v-model="formLabelAlign.price"></el-input>
-            </el-form-item>
-            <el-form-item label="Ảnh">
-               <el-upload
-                   action="#"
-                   :on-change="getUrl"
-                   list-type="picture-card"
-                   :auto-upload="false">
-                  <i slot="default" class="el-icon-plus"></i>
-                  <div slot="file" slot-scope="{file}">
-                     <img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
-                     <span class="el-upload-list__item-actions">
-                        <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleRemove(file)">
-                           <i class="el-icon-delete"></i>
-                       </span>
-                     </span>
-                  </div>
-               </el-upload>
-               <el-dialog :visible.sync="dialogVisible1">
-                  <img width="100%" :src="dialogImageUrl" alt="">
-               </el-dialog>
-            </el-form-item>
-         </el-form>
+      <el-dialog title="Thêm sản phẩm" :visible.sync="dialogVisible" width="60%" @close="handleProp">
+         <el-row>
+            <el-col :span="12">
+               <Upload :rop="rop" @fileImage="handleChild"/>
+            </el-col>
+            <el-col :span="12">
+               <el-form label-position="left" label-width="150px" :model="formLabelAlign">
+                  <el-form-item label="Tên sản phẩm">
+                     <el-input v-model="formLabelAlign.name"></el-input>
+                  </el-form-item>
+                  <el-form-item label="Mô tả">
+                     <el-input v-model="formLabelAlign.description"></el-input>
+                  </el-form-item>
+                  <el-form-item label="Đơn giá">
+                     <el-input v-model="formLabelAlign.price"></el-input>
+                  </el-form-item>
+               </el-form>
+            </el-col>
+         </el-row>
          <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">Đóng</el-button>
             <el-button type="primary" v-if="!check" @click="updateProduct()">Thay đổi</el-button>
@@ -94,9 +81,13 @@
 
 <script>
 import axios from "axios";
+import Upload from './Upload'
 
 export default {
-   name: "Ex9_1",
+   name: "Ex10_2",
+   components: {
+      Upload
+   },
    data() {
       return {
          listProduct: [],
@@ -120,7 +111,9 @@ export default {
 
          dialogImageUrl: '',
          dialogVisible1: false,
-         disabled: false
+         disabled: false,
+
+         rop: ''
       }
    },
    methods: {
@@ -193,6 +186,7 @@ export default {
          this.formLabelAlign.price = value.price
          this.formLabelAlign.image = value.image
          this.dialogVisible = true
+         this.rop = this.formLabelAlign.image
       },
       updateProduct() {
          this.dialogVisible = false
@@ -246,16 +240,12 @@ export default {
          this.getListProduct(value)
       },
 
-      handleRemove(file) {
-         console.log(file);
+      handleProp() {
+         this.rop = ''
       },
-      getUrl(file) {
-         // let data = new FileReader()
-         // data.readAsDataURL(file.raw);
-         // data.onload = (e) => {
-         //    console.log(e.target)
-         // }
-         this.formLabelAlign.image = file.raw
+
+      handleChild(val) {
+         this.formLabelAlign.image = val
       }
    },
    watch: {

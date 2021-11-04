@@ -96,7 +96,7 @@
 import axios from "axios";
 
 export default {
-   name: "Ex9_1",
+   name: "Ex10_1",
    data() {
       return {
          listProduct: [],
@@ -250,11 +250,6 @@ export default {
          console.log(file);
       },
       getUrl(file) {
-         // let data = new FileReader()
-         // data.readAsDataURL(file.raw);
-         // data.onload = (e) => {
-         //    console.log(e.target)
-         // }
          this.formLabelAlign.image = file.raw
       }
    },
