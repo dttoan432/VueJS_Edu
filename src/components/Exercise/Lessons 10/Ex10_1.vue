@@ -45,24 +45,10 @@
                <el-input v-model="formLabelAlign.price"></el-input>
             </el-form-item>
             <el-form-item label="Ảnh">
-               <el-upload
-                   action="#"
-                   :on-change="getUrl"
-                   list-type="picture-card"
-                   :auto-upload="false">
-                  <i slot="default" class="el-icon-plus"></i>
-                  <div slot="file" slot-scope="{file}">
-                     <img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
-                     <span class="el-upload-list__item-actions">
-                        <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleRemove(file)">
-                           <i class="el-icon-delete"></i>
-                       </span>
-                     </span>
-                  </div>
-               </el-upload>
-               <el-dialog :visible.sync="dialogVisible1">
-                  <img width="100%" :src="dialogImageUrl" alt="">
-               </el-dialog>
+               <div class="upload-box">
+                  <input type="file" @change="onFileChange" ref="upload" />
+                  <img :src="dialogImageUrl" alt="" class="img-upload" @click="show()">
+               </div>
             </el-form-item>
          </el-form>
          <span slot="footer" class="dialog-footer">
@@ -129,6 +115,7 @@ export default {
          this.formLabelAlign.description = ''
          this.formLabelAlign.price = ''
          this.formLabelAlign.image = ''
+         this.dialogImageUrl = ''
          this.id = ''
          if (value) {
             this.check = true;
@@ -165,7 +152,9 @@ export default {
          bodyFormData.append('name', this.formLabelAlign.name);
          bodyFormData.append('description', this.formLabelAlign.description);
          bodyFormData.append('price', this.formLabelAlign.price);
-         bodyFormData.append('image', this.formLabelAlign.image);
+         if (typeof this.formLabelAlign.image === "object") {
+            bodyFormData.append('image', this.formLabelAlign.image);
+         }
          axios({
             method: 'post',
             url: 'http://vuecourse.zent.edu.vn/api/products',
@@ -249,8 +238,26 @@ export default {
       handleRemove(file) {
          console.log(file);
       },
-      getUrl(file) {
-         this.formLabelAlign.image = file.raw
+      show() {
+         this.$refs.upload.click()
+      },
+      onFileChange(e) {
+         if (e.target.files.length) {
+            const file = e.target.files[0];
+            this.dialogImageUrl = URL.createObjectURL(file);
+            this.formLabelAlign.image = file
+
+            if (typeof file === "object") {
+               console.log('aaaaaaaaaaaaaaa')
+            }
+            console.log(file)
+         }
+      },
+      getUrl(e) {
+         const file = e.target.files[0];
+         let data = URL.createObjectURL(file);
+
+         console.log(data)
       }
    },
    watch: {
@@ -309,5 +316,20 @@ export default {
       height: 178px;
       display: block;
    }
+
+   .upload-box {
+      position: relative;
+
+      input {
+         position: absolute;
+         width: 0;
+      }
+      .img-upload {
+         width: 100px;
+         height: 100px;
+         border: 1px dotted lightgray;
+      }
+   }
+
 }
 </style>
